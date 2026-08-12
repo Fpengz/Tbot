@@ -1,0 +1,17 @@
+[runtime]
+mode = "paper"
+symbol = "BTC-USD"
+decision_interval_seconds = 300
+data_stale_after_seconds = 10
+
+[simulator]
+starting_cash_usd = "10000"
+taker_fee_bps = "60"
+slippage_bps = "5"
+
+[risk]
+max_position_btc = "0.01"
+max_order_notional_usd = "250"
+max_daily_loss_usd = "50"
+kill_switch = false
+
