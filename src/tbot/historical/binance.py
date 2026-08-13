@@ -4,6 +4,7 @@ The archive is research data, not a substitute for venue-matched Coinbase
 execution validation. Every downloaded file has source URL and SHA-256 recorded
 in a manifest next to the dataset.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -81,7 +82,9 @@ def _download(url: str, destination: Path) -> tuple[str, int]:
     return digest.hexdigest(), byte_count
 
 
-def download_month(*, root: Path, kind: str, symbol: str, month: str, interval: str | None = None) -> DownloadedFile:
+def download_month(
+    *, root: Path, kind: str, symbol: str, month: str, interval: str | None = None
+) -> DownloadedFile:
     """Download and extract one immutable archive, reusing an existing verified file."""
     url = archive_url(kind=kind, symbol=symbol, month=month, interval=interval)
     source_name = url.rsplit("/", 1)[-1]
@@ -103,11 +106,18 @@ def download_month(*, root: Path, kind: str, symbol: str, month: str, interval: 
             extracted = folder / csv_members[0]
             if extracted != csv_path:
                 extracted.replace(csv_path)
-    return DownloadedFile(kind, symbol.upper(), interval, month, url, digest, byte_count, str(archive), str(csv_path))
+    return DownloadedFile(
+        kind, symbol.upper(), interval, month, url, digest, byte_count, str(archive), str(csv_path)
+    )
 
 
-def download_range(*, root: Path, kind: str, symbol: str, start: str, end: str, interval: str | None = None) -> list[DownloadedFile]:
-    files = [download_month(root=root, kind=kind, symbol=symbol, month=month, interval=interval) for month in months_between(start, end)]
+def download_range(
+    *, root: Path, kind: str, symbol: str, start: str, end: str, interval: str | None = None
+) -> list[DownloadedFile]:
+    files = [
+        download_month(root=root, kind=kind, symbol=symbol, month=month, interval=interval)
+        for month in months_between(start, end)
+    ]
     manifest = {
         "provider": "Binance public data archive",
         "market": "spot",
@@ -116,5 +126,7 @@ def download_range(*, root: Path, kind: str, symbol: str, start: str, end: str, 
     }
     directory = root / "binance" / "spot" / kind / f"symbol={symbol.upper()}"
     directory.mkdir(parents=True, exist_ok=True)
-    (directory / f"manifest-{start}-to-{end}.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (directory / f"manifest-{start}-to-{end}.json").write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     return files

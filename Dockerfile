@@ -5,4 +5,4 @@ COPY configs ./configs
 COPY src ./src
 RUN pip install --no-cache-dir .[data,live-data]
 ENV PYTHONUNBUFFERED=1
-CMD ["python", "-m", "tbot"]
+CMD ["python", "-m", "tbot", "runtime"]

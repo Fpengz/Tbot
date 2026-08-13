@@ -1,0 +1,333 @@
+nohup: ignoring input
+Using CPython 3.12.3 interpreter at: /usr/bin/python3.12
+Creating virtual environment at: .venv
+   Building tbot @ file:///home/cluster/projects/Tbot
+      Built tbot @ file:///home/cluster/projects/Tbot
+Installed 8 packages in 126ms
+[08/12/26 20:46:14] INFO     observability_started
+                    INFO     feed_session_failed
+[08/12/26 20:46:15] INFO     feed_session_failed
+[08/12/26 20:46:17] INFO     feed_session_failed
+[08/12/26 20:46:21] INFO     feed_session_failed
+[08/12/26 20:46:29] INFO     feed_session_failed
+[08/12/26 20:46:45] INFO     feed_session_failed
+[08/12/26 20:47:16] INFO     alert
+                    INFO     feed_stale
+[08/12/26 20:47:17] INFO     feed_stale
+[08/12/26 20:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 20:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 21:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:10:00] INFO     bar_closed
+[08/12/26 22:15:00] INFO     bar_closed
+[08/12/26 22:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:35:00] INFO     bar_closed
+[08/12/26 22:40:00] INFO     bar_closed
+[08/12/26 22:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 22:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 23:00:00] INFO     bar_closed
+[08/12/26 23:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 23:10:00] INFO     bar_closed
+[08/12/26 23:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 23:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 23:25:00] INFO     bar_closed
+[08/12/26 23:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 23:35:00] INFO     bar_closed
+[08/12/26 23:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 23:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/12/26 23:50:00] INFO     bar_closed
+[08/12/26 23:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:20:00] INFO     bar_closed
+[08/13/26 00:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:45:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 00:55:00] INFO     bar_closed
+[08/13/26 01:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:10:00] INFO     bar_closed
+[08/13/26 01:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:45:00] INFO     bar_closed
+[08/13/26 01:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 01:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:15:00] INFO     bar_closed
+[08/13/26 02:20:00] INFO     bar_closed
+[08/13/26 02:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:30:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 02:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:00:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:15:00] INFO     bar_closed
+[08/13/26 03:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:30:00] INFO     bar_closed
+[08/13/26 03:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 03:50:00] INFO     bar_closed
+[08/13/26 03:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:00:00] INFO     bar_closed
+[08/13/26 04:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:40:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:45:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:50:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 04:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:10:04] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:20:00] INFO     bar_closed
+[08/13/26 05:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:31:01] INFO     feed_session_failed
+[08/13/26 05:31:32] INFO     alert
+                    INFO     feed_stale
+[08/13/26 05:31:33] INFO     feed_stale
+[08/13/26 05:35:05] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:40:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:45:00] INFO     bar_closed
+[08/13/26 05:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 05:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:20:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:30:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:45:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 06:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:10:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:35:32] INFO     feed_session_failed
+[08/13/26 07:36:03] INFO     alert
+                    INFO     feed_stale
+[08/13/26 07:36:04] INFO     feed_stale
+[08/13/26 07:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 07:55:00] INFO     bar_closed
+[08/13/26 08:00:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:05:00] INFO     bar_closed
+[08/13/26 08:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:17:46] INFO     feed_session_failed
+[08/13/26 08:18:17] INFO     alert
+                    INFO     feed_stale
+[08/13/26 08:18:18] INFO     feed_stale
+[08/13/26 08:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:25:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:30:10] INFO     bar_closed
+[08/13/26 08:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:40:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 08:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:00:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:05:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:10:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:15:01] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:35:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:40:00] INFO     bar_closed
+[08/13/26 09:45:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:50:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 09:55:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 10:00:00] INFO     bar_closed
+[08/13/26 10:05:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 10:10:00] INFO     bar_closed
+[08/13/26 10:15:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 10:20:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 10:25:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 10:30:00] INFO     alert
+                    INFO     paper_decision_skipped
+[08/13/26 10:35:00] INFO     alert
+                    INFO     paper_decision_skipped

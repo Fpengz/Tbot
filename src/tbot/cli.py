@@ -1,4 +1,5 @@
 """Single Typer command surface for the paper-only trading system."""
+
 from __future__ import annotations
 
 import asyncio
@@ -22,18 +23,29 @@ app = typer.Typer(
     no_args_is_help=True,
     add_completion=False,
 )
-data_app = typer.Typer(help="Acquire reproducible historical research datasets.", no_args_is_help=True)
+data_app = typer.Typer(
+    help="Acquire reproducible historical research datasets.", no_args_is_help=True
+)
 app.add_typer(data_app, name="data")
 
-ConfigPath = Annotated[Path, typer.Option("--config", exists=True, readable=True, help="Paper-only TOML configuration.")]
+ConfigPath = Annotated[
+    Path,
+    typer.Option("--config", exists=True, readable=True, help="Paper-only TOML configuration."),
+]
 DataPath = Annotated[Path, typer.Option("--data-dir", help="Append-only raw-data directory.")]
 
 
 @app.callback()
 def root(
-    log_level: Annotated[str, typer.Option("--log-level", help="DEBUG, INFO, WARNING, ERROR.")] = "INFO",
-    log_format: Annotated[str, typer.Option("--log-format", help="Operator console format: rich or json.")] = "rich",
-    log_file: Annotated[Path | None, typer.Option("--log-file", help="Optional JSONL audit log path.")] = None,
+    log_level: Annotated[
+        str, typer.Option("--log-level", help="DEBUG, INFO, WARNING, ERROR.")
+    ] = "INFO",
+    log_format: Annotated[
+        str, typer.Option("--log-format", help="Operator console format: rich or json.")
+    ] = "rich",
+    log_file: Annotated[
+        Path | None, typer.Option("--log-file", help="Optional JSONL audit log path.")
+    ] = None,
 ) -> None:
     """Configure consistent operator and machine-readable observability."""
     if log_format not in {"rich", "json"}:
@@ -44,7 +56,9 @@ def root(
 @app.command("record")
 def record_command(
     symbol: Annotated[str, typer.Option("--symbol", help="Public Coinbase product.")] = "BTC-USD",
-    seconds: Annotated[float, typer.Option("--seconds", min=0.1, help="Bounded recording duration.")] = 60,
+    seconds: Annotated[
+        float, typer.Option("--seconds", min=0.1, help="Bounded recording duration.")
+    ] = 60,
     data_dir: DataPath = Path("data/raw"),
 ) -> None:
     """Record public trades and level-2 batches; no order code is involved."""
@@ -54,53 +68,138 @@ def record_command(
 
 @data_app.command("binance")
 def download_binance_command(
-    kind: Annotated[str, typer.Option("--kind", case_sensitive=False, help="Archive kind: klines, aggTrades, or trades.")] = "klines",
+    kind: Annotated[
+        str,
+        typer.Option(
+            "--kind", case_sensitive=False, help="Archive kind: klines, aggTrades, or trades."
+        ),
+    ] = "klines",
     symbol: Annotated[str, typer.Option("--symbol", help="Binance Spot symbol.")] = "BTCUSDT",
     start: Annotated[str, typer.Option("--start", help="First month, YYYY-MM.")] = "2024-01",
     end: Annotated[str, typer.Option("--end", help="Last month, YYYY-MM.")] = "2026-07",
-    interval: Annotated[str, typer.Option("--interval", help="Kline interval; required for --kind klines.")] = "1m",
+    interval: Annotated[
+        str, typer.Option("--interval", help="Kline interval; required for --kind klines.")
+    ] = "1m",
     data_dir: DataPath = Path("data/historical"),
 ) -> None:
     """Download Binance public Spot archives and write a provenance manifest."""
     normalized_kind = kind.lower()
     if normalized_kind not in SUPPORTED_KINDS:
         raise typer.BadParameter(f"kind must be one of: {', '.join(sorted(SUPPORTED_KINDS))}")
-    files = download_range(root=data_dir, kind=normalized_kind, symbol=symbol, start=start, end=end, interval=interval if normalized_kind == "klines" else None)
-    typer.echo(json.dumps({"downloaded": len(files), "kind": normalized_kind, "symbol": symbol.upper(), "data_dir": str(data_dir)}, sort_keys=True))
+    files = download_range(
+        root=data_dir,
+        kind=normalized_kind,
+        symbol=symbol,
+        start=start,
+        end=end,
+        interval=interval if normalized_kind == "klines" else None,
+    )
+    typer.echo(
+        json.dumps(
+            {
+                "downloaded": len(files),
+                "kind": normalized_kind,
+                "symbol": symbol.upper(),
+                "data_dir": str(data_dir),
+            },
+            sort_keys=True,
+        )
+    )
 
 
 @app.command("runtime")
 def runtime_command(
     config: ConfigPath = Path("configs/paper.example.toml"),
     data_dir: DataPath = Path("data/raw"),
-    checkpoint: Annotated[Path, typer.Option("--checkpoint", help="Atomic paper-account checkpoint.")] = Path("data/state/paper-account.json"),
-    seconds: Annotated[float | None, typer.Option("--seconds", min=0.1, help="Optional bounded smoke-test duration.")] = None,
-    observability_host: Annotated[str | None, typer.Option("--observability-host", help="Bind status/health/metrics server; e.g. 127.0.0.1.")] = "127.0.0.1",
-    observability_port: Annotated[int, typer.Option("--observability-port", min=0, max=65535, help="Status server port; use 0 for a free port.")] = 8080,
+    checkpoint: Annotated[
+        Path, typer.Option("--checkpoint", help="Atomic paper-account checkpoint.")
+    ] = Path("data/state/paper-account.json"),
+    seconds: Annotated[
+        float | None,
+        typer.Option("--seconds", min=0.1, help="Optional bounded smoke-test duration."),
+    ] = None,
+    observability_host: Annotated[
+        str | None,
+        typer.Option(
+            "--observability-host", help="Bind status/health/metrics server; e.g. 127.0.0.1."
+        ),
+    ] = "127.0.0.1",
+    observability_port: Annotated[
+        int,
+        typer.Option(
+            "--observability-port",
+            min=0,
+            max=65535,
+            help="Status server port; use 0 for a free port.",
+        ),
+    ] = 8080,
 ) -> None:
     """Run the resilient public-data and simulated-paper supervisor."""
     runtime = build_runtime(config_path=config, data_root=data_dir, checkpoint_path=checkpoint)
-    asyncio.run(run_operational(runtime, duration_seconds=seconds, observability_host=observability_host, observability_port=observability_port))
+    asyncio.run(
+        run_operational(
+            runtime,
+            duration_seconds=seconds,
+            observability_host=observability_host,
+            observability_port=observability_port,
+        )
+    )
+
+
+@app.command("panel")
+def panel_command(
+    config: ConfigPath = Path("configs/paper.example.toml"),
+    data_dir: DataPath = Path("data/raw"),
+    checkpoint: Annotated[
+        Path, typer.Option("--checkpoint", help="Atomic paper-account checkpoint.")
+    ] = Path("data/state/paper-account.json"),
+    host: Annotated[
+        str, typer.Option("--host", help="Panel bind address; local-only by default.")
+    ] = "127.0.0.1",
+    port: Annotated[
+        int, typer.Option("--port", min=0, max=65535, help="Panel port; use 0 for a free port.")
+    ] = 8000,
+) -> None:
+    """Run the local paper-only FastAPI control panel."""
+    import uvicorn
+
+    from .panel import create_panel_app
+
+    runtime = build_runtime(config_path=config, data_root=data_dir, checkpoint_path=checkpoint)
+    uvicorn.run(create_panel_app(runtime), host=host, port=port, log_level="info")
 
 
 @app.command("status")
 def status_command(
     config: ConfigPath = Path("configs/paper.example.toml"),
-    checkpoint: Annotated[Path, typer.Option("--checkpoint", help="Optional checkpoint to inspect.")] = Path("data/state/paper-account.json"),
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON rather than a Rich table.")] = False,
+    checkpoint: Annotated[
+        Path, typer.Option("--checkpoint", help="Optional checkpoint to inspect.")
+    ] = Path("data/state/paper-account.json"),
+    as_json: Annotated[
+        bool, typer.Option("--json", help="Emit JSON rather than a Rich table.")
+    ] = False,
 ) -> None:
     """Show safe runtime configuration and the latest checkpoint, if present."""
     settings = load_paper_config(config)
-    payload: dict[str, object] = {"mode": settings.mode, "symbol": settings.symbol, "execution_venue": "simulated", "live_trading": False, "kill_switch": settings.kill_switch}
+    payload: dict[str, object] = {
+        "mode": settings.mode,
+        "symbol": settings.symbol,
+        "execution_venue": "simulated",
+        "live_trading": False,
+        "kill_switch": settings.kill_switch,
+    }
     if checkpoint.exists():
         payload["checkpoint"] = json.loads(checkpoint.read_text(encoding="utf-8"))
     if as_json:
         typer.echo(json.dumps(payload, indent=2, sort_keys=True))
         return
     table = Table(title="tbot status", show_header=True, header_style="bold cyan")
-    table.add_column("Field"); table.add_column("Value")
+    table.add_column("Field")
+    table.add_column("Value")
     for key, value in payload.items():
-        table.add_row(key, json.dumps(value, sort_keys=True) if isinstance(value, dict) else str(value))
+        table.add_row(
+            key, json.dumps(value, sort_keys=True) if isinstance(value, dict) else str(value)
+        )
     Console().print(table)
 
 

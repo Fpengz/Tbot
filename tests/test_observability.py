@@ -20,15 +20,22 @@ def test_alerts_are_deduplicated_within_cooldown() -> None:
 
 
 def test_metrics_have_prometheus_text() -> None:
-    metrics = Metrics(); metrics.increment("feed.trade", 2); metrics.set_gauge("equity.usd", Decimal("100.5"))
+    metrics = Metrics()
+    metrics.increment("feed.trade", 2)
+    metrics.set_gauge("equity.usd", Decimal("100.5"))
     exposition = metrics.prometheus()
     assert "tbot_feed_trade_total 2" in exposition
     assert "tbot_equity_usd 100.5" in exposition
 
 
 def test_observability_server_serves_health_status_and_metrics() -> None:
-    metrics = Metrics(); metrics.increment("feed.trade")
-    server = ObservabilityServer(metrics=metrics, health=lambda: Health(True, True, {"mode": "paper"}), status=lambda: {"account": {"cash": "10"}})
+    metrics = Metrics()
+    metrics.increment("feed.trade")
+    server = ObservabilityServer(
+        metrics=metrics,
+        health=lambda: Health(True, True, {"mode": "paper"}),
+        status=lambda: {"account": {"cash": "10"}},
+    )
     port = server.start(port=0)
     try:
         with urlopen(f"http://127.0.0.1:{port}/readyz") as response:

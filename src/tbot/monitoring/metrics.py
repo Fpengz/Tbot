@@ -1,4 +1,5 @@
 """Thread-safe in-process metrics with Prometheus text exposition."""
+
 from __future__ import annotations
 
 from collections import Counter

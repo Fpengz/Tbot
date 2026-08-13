@@ -1,0 +1,6 @@
+nohup: ignoring input
+Usage: tbot runtime [OPTIONS]
+Try 'tbot runtime --help' for help.
+╭─ Error ──────────────────────────────────────────────────────────────────────╮
+│ Invalid value for '--config': Path 'configs/btc.paper.toml' does not exist.  │
+╰──────────────────────────────────────────────────────────────────────────────╯

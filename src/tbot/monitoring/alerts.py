@@ -1,4 +1,5 @@
 """Alert routing with deduplication to prevent outage alert storms."""
+
 from __future__ import annotations
 
 from collections.abc import Callable

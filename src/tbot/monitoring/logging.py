@@ -1,4 +1,5 @@
 """Human-friendly Rich logs and structured JSON logs from the same event API."""
+
 from __future__ import annotations
 
 import json
@@ -60,6 +61,8 @@ def configure_logging(
     return logger
 
 
-def log_event(logger: logging.Logger, event: str, *, level: int = logging.INFO, **fields: Any) -> None:
+def log_event(
+    logger: logging.Logger, event: str, *, level: int = logging.INFO, **fields: Any
+) -> None:
     """Emit a semantic event. Do not pass credentials or raw account identifiers."""
     logger.log(level, event, extra={"event": event, "fields": fields})

@@ -1,9 +1,12 @@
 """Deterministic UTC bar aggregation from normalized trades."""
+
 from __future__ import annotations
+
 from collections import defaultdict
-from datetime import timedelta
+from collections.abc import Iterable
+from datetime import datetime, timedelta
 from decimal import Decimal
-from typing import Iterable
+
 from tbot.core.models import Bar, Trade
 
 
@@ -15,11 +18,13 @@ class BarBuilder:
             raise ValueError("seconds must be positive")
         self.seconds = seconds
         self._trades: list[Trade] = []
-        self._start = None
+        self._start: datetime | None = None
 
     def add(self, trade: Trade) -> Bar | None:
         epoch = int(trade.event_time.timestamp())
-        start = trade.event_time.fromtimestamp(epoch - epoch % self.seconds, tz=trade.event_time.tzinfo)
+        start = trade.event_time.fromtimestamp(
+            epoch - epoch % self.seconds, tz=trade.event_time.tzinfo
+        )
         if self._start is None:
             self._start = start
         if start < self._start:
@@ -33,10 +38,11 @@ class BarBuilder:
         self._start, self._trades = start, [trade]
         return closed[0]
 
+
 def aggregate_bars(trades: Iterable[Trade], *, seconds: int = 60) -> list[Bar]:
     if seconds <= 0:
         raise ValueError("seconds must be positive")
-    buckets: dict[tuple[str, object], list[Trade]] = defaultdict(list)
+    buckets: dict[tuple[str, datetime], list[Trade]] = defaultdict(list)
     for trade in sorted(trades, key=lambda item: item.event_time):
         epoch = int(trade.event_time.timestamp())
         start = trade.event_time.fromtimestamp(epoch - epoch % seconds, tz=trade.event_time.tzinfo)
@@ -44,6 +50,17 @@ def aggregate_bars(trades: Iterable[Trade], *, seconds: int = 60) -> list[Bar]:
     result: list[Bar] = []
     for (symbol, start), items in sorted(buckets.items(), key=lambda pair: pair[0][1]):
         prices = [item.price for item in items]
-        result.append(Bar(symbol, start, start + timedelta(seconds=seconds), prices[0], max(prices),
-                          min(prices), prices[-1], sum((item.size for item in items), Decimal("0")), len(items)))
+        result.append(
+            Bar(
+                symbol,
+                start,
+                start + timedelta(seconds=seconds),
+                prices[0],
+                max(prices),
+                min(prices),
+                prices[-1],
+                sum((item.size for item in items), Decimal(0)),
+                len(items),
+            )
+        )
     return result

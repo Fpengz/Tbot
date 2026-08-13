@@ -1,7 +1,7 @@
 services:
   paper-bot:
     build: .
-    command: ["python", "-m", "tbot.runtime"]
+    command: ["python", "-m", "tbot", "runtime"]
     restart: unless-stopped
     read_only: true
     tmpfs:

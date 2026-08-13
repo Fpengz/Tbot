@@ -96,7 +96,7 @@ class BestBidAsk:
 
     @property
     def mid_price(self) -> Decimal:
-        return (self.bid_price + self.ask_price) / Decimal("2")
+        return (self.bid_price + self.ask_price) / Decimal(2)
 
 
 @dataclass(frozen=True, slots=True)
@@ -125,11 +125,11 @@ class OrderIntent:
     @classmethod
     def no_trade(
         cls, *, symbol: str, signal_time: datetime, strategy_id: str, rationale: str
-    ) -> "OrderIntent":
+    ) -> OrderIntent:
         return cls(
             symbol=symbol,
             side=IntentSide.NO_TRADE,
-            quantity=Decimal("0"),
+            quantity=Decimal(0),
             signal_time=signal_time,
             expires_at=signal_time + timedelta(minutes=5),
             strategy_id=strategy_id,

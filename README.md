@@ -4,31 +4,42 @@ Research-first infrastructure for short-horizon crypto strategies. The initial
 scope is BTC-USD spot market data from Coinbase and a local simulated-paper
 venue. It has no exchange credentials and cannot submit a real order.
 
-Read [the initial contract](docs/initial-contract.md) before adding a module.
+This is an early research scaffold, not a production trading system. Read the
+[initial contract](docs/initial-contract.md) before adding a module and the
+[current implementation status](docs/current-state.md) before interpreting a
+paper run or backtest.
 
 ## Local setup
 
 ```bash
 uv sync --all-extras
-uv run pytest
+uv run python -m pytest -q
+uv run ruff check .
+uv run ruff format --check .
+uv run ty check
 ```
 
-`uv` owns `.venv` and [`uv.lock`](uv.lock). Do not install project packages
-with bare `pip`; add or update dependencies in `pyproject.toml`, then run
-`uv lock` and `uv sync --all-extras`.
+`uv` owns `.venv` and [`uv.lock`](uv.lock). The development group includes
+pytest, Ruff, ty, and the live-feed dependency needed for complete type
+checking. Do not install project packages with bare `pip`; add or update
+dependencies in `pyproject.toml`, then run `uv lock` and `uv sync --all-extras`.
 
 ## Modes
 
-- `backtest`: historical event replay with simulated fills.
+- `backtest`: a programmatic bar replay helper with simulated fills. There is no
+  historical-data-to-bar pipeline yet; the local panel can submit bounded
+  chronological replays.
 - `paper`: live public market data with simulated fills only.
 - `live`: intentionally unsupported. It must not be introduced without an
   explicit operator-approved design and separate user authorization.
 
 ## Verification
 
-`uv run pytest` verifies core market-data, strategy, risk, simulation, paper
-orchestration, configuration, and monitoring contracts. `uv run tbot
-live` must fail; this is an intentional safety check.
+The verification gate is `uv run python -m pytest -q`, `uv run ruff check .`,
+`uv run ruff format --check .`, and `uv run ty check`. The tests cover core
+market-data, strategy, risk, simulation, paper orchestration, configuration,
+and monitoring contracts. `uv run tbot live` must fail; this is an intentional
+safety check.
 
 ## Record public data
 
@@ -68,10 +79,25 @@ execution results.
 uv run tbot runtime
 ```
 
-It subscribes only to public market data, records raw events, checkpoints paper
-state after each closed bar/session, reconnects with backoff, and responds to
-`SIGINT`/`SIGTERM` with a clean checkpoint. To run a bounded smoke test, add
-`--seconds 60`. Run `uv run tbot --help` for every command and flag.
+It subscribes only to public market data, records events, writes a restoreable
+paper-account checkpoint after each closed bar/session, reconnects with backoff,
+and responds to `SIGINT`/`SIGTERM` with a final checkpoint. Startup restores the
+account, fill identities, and strategy bar history from that checkpoint. To run
+a bounded smoke test, add `--seconds 60`. Run `uv run tbot --help` for every
+command and flag.
+
+## Run the paper control panel
+
+```bash
+uv run tbot panel
+```
+
+Open `http://127.0.0.1:8000`. The panel starts stopped and provides paper-only
+runtime start/stop, fail-closed health, kill-switch control, portfolio and
+fill inspection, target-position requests routed through the existing risk
+manager and simulator, and bounded momentum backtests. It has no live venue,
+credential, or order-submission endpoint. Keep it bound to localhost unless it
+is placed behind an authenticated operator network.
 
 ## Logging and monitoring
 
@@ -85,9 +111,13 @@ uv run tbot --log-file data/logs/runtime.jsonl runtime --seconds 60
 The runtime starts a localhost-only observability server by default. It serves:
 
 - `GET /healthz` — process liveness
-- `GET /readyz` — fresh feed and usable book readiness
+- `GET /readyz` — fresh feed and usable, fresh book readiness; startup grace
+  does not override these conditions
 - `GET /metrics` — Prometheus-compatible plain-text metrics
 - `GET /status` — current paper account, health, and metric snapshot
 
 For example, use `uv run tbot runtime --observability-port 8080`; bind to a
 non-local address only behind an authenticated network boundary.
+
+See the [operations runbook](docs/operations.md) for preflight, shutdown, and
+interpretation guidance.
